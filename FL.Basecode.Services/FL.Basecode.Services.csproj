@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FL.Basecode.Data\FL.Basecode.Data.csproj" />
+    <ProjectReference Include="..\FL.Basecode.DTOs\FL.Basecode.DTOs.csproj" />
     <ProjectReference Include="..\FL.Basecode.Utilities\FL.Basecode.Utilities.csproj" />
   </ItemGroup>
 
