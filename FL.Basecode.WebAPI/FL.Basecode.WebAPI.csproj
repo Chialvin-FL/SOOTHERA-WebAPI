@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FirebaseAdmin" Version="3.4.0" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.73.0" />
+    <PackageReference Include="Google.Cloud.Firestore" Version="4.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FL.Basecode.Data\FL.Basecode.Data.csproj" />
+    <ProjectReference Include="..\FL.Basecode.DTOs\FL.Basecode.DTOs.csproj" />
     <ProjectReference Include="..\FL.Basecode.Services\FL.Basecode.Services.csproj" />
     <ProjectReference Include="..\FL.Basecode.Utilities\FL.Basecode.Utilities.csproj" />
   </ItemGroup>

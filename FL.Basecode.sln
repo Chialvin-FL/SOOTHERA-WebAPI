@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FL.Basecode.WebAPI", "FL.Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FL.Basecode.Utilities", "FL.Basecode.Utilities\FL.Basecode.Utilities.csproj", "{F923DA64-3CF9-458F-8186-B94B2E28F8F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FL.Basecode.DTOs", "FL.Basecode.DTOs\FL.Basecode.DTOs.csproj", "{90227E29-CAFC-4B2D-93BD-7C45A697F213}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F923DA64-3CF9-458F-8186-B94B2E28F8F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F923DA64-3CF9-458F-8186-B94B2E28F8F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F923DA64-3CF9-458F-8186-B94B2E28F8F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90227E29-CAFC-4B2D-93BD-7C45A697F213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90227E29-CAFC-4B2D-93BD-7C45A697F213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90227E29-CAFC-4B2D-93BD-7C45A697F213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90227E29-CAFC-4B2D-93BD-7C45A697F213}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
