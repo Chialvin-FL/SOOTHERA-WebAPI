@@ -1,6 +1,8 @@
 ﻿using FL.Basecode.DTOs;
 using FL.Basecode.DTOs.Authentication;
 using FL.Basecode.DTOs.Authentication.Register;
+using FL.Basecode.DTOs.Authentication.Login;
+
 using FL.Basecode.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,11 +28,26 @@ namespace FL.Basecode.WebAPI.Controllers
         }
 
         [HttpPost("register/google/login")]
-        public async Task<IActionResult> RegisterWithGoogle([FromBody] GoogleAuthRequest request)
+        public async Task<IActionResult> RegisterWithGoogle(GoogleAuthRequest request)
         {
             var result = await _authService.RegisterWithGoogleAsync(request);
             return StatusCode(result.StatusCode, result);
         }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
+        {
+            var result = await _authService.ForgotPasswordAsync(request);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginRequest request)
+        {
+            var result = await _authService.LoginAsync(request);
+            return StatusCode(result.StatusCode, result);
+        }
+
     }
 
 }

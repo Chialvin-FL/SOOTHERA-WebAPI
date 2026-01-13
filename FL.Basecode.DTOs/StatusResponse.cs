@@ -1,4 +1,4 @@
-﻿namespace FL.Basecode.DTOs.Authentication
+﻿namespace FL.Basecode.DTOs
 {
     public class StatusResponse
     {

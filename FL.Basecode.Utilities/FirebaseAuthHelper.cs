@@ -39,5 +39,10 @@ namespace FL.Basecode.Utilities.Firebase
         {
             return await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
         }
+
+        public async Task<string> GeneratePasswordResetLinkAsync(string email)
+        {
+            return await _auth.GeneratePasswordResetLinkAsync(email);
+        }
     }
 }
