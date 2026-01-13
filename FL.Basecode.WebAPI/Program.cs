@@ -44,8 +44,6 @@ builder.Services.AddSingleton(provider =>
 // Your app services
 builder.Services.AddScoped<FirebaseAuthHelper>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IWeatherService, WeatherService>();
-
 // Controllers & Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -34,5 +34,10 @@ namespace FL.Basecode.Utilities.Firebase
         {
             return await _auth.GenerateEmailVerificationLinkAsync(email);
         }
+
+        public static async Task<FirebaseToken> VerifyGoogleIdTokenAsync(string idToken)
+        {
+            return await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+        }
     }
 }
