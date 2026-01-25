@@ -317,17 +317,63 @@ namespace FL.Basecode.Services.Implementation
                 // ✅ Initialize FirebaseAuthClientHelper
                 var authClient = new FirebaseAuthClientHelper();
 
-                // ✅ Sign in with email & password
-                var credential = await authClient.LoginAsync(request.Email, request.Password);
+                // Use Identity Toolkit REST API to sign in and obtain tokens
+                var http = new HttpClient();
+                var response = await http.PostAsJsonAsync(
+                    $"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={authClient.ApiKey}",
+                    new
+                    {
+                        email = request.Email,
+                        password = request.Password,
+                        returnSecureToken = true
+                    });
 
-                // ✅ Get the ID token from the client SDK
-                var idToken = credential.User.IdToken;
+                var content = await response.Content.ReadAsStringAsync();
 
-                // ✅ Verify token and get UID using Admin SDK
+                if (!response.IsSuccessStatusCode)
+                {
+                    var error = JsonDocument.Parse(content)
+                        .RootElement
+                        .GetProperty("error")
+                        .GetProperty("message")
+                        .GetString();
+
+                    return error switch
+                    {
+                        "EMAIL_NOT_FOUND" => new StatusResponse
+                        {
+                            Success = false,
+                            StatusCode = 401,
+                            Message = "Incorrect email or password."
+                        },
+                        "INVALID_PASSWORD" => new StatusResponse
+                        {
+                            Success = false,
+                            StatusCode = 401,
+                            Message = "Incorrect email or password."
+                        },
+                        "USER_DISABLED" => new StatusResponse
+                        {
+                            Success = false,
+                            StatusCode = 403,
+                            Message = "Your account has been disabled."
+                        },
+                        _ => new StatusResponse
+                        {
+                            Success = false,
+                            StatusCode = 400,
+                            Message = error
+                        }
+                    };
+                }
+
+                var json = JsonDocument.Parse(content).RootElement;
+                var idToken = json.GetProperty("idToken").GetString();
+                var localId = json.GetProperty("localId").GetString();
+
+                // Verify token and fetch user via Admin SDK
                 var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
                 var uid = decodedToken.Uid;
-
-                // ✅ Fetch full user info from Admin SDK
                 var userRecord = await FirebaseAuth.DefaultInstance.GetUserAsync(uid);
 
                 if (!userRecord.EmailVerified)
@@ -355,26 +401,13 @@ namespace FL.Basecode.Services.Implementation
                     }
                 };
             }
-            catch (Firebase.Auth.FirebaseAuthException ex)
+            catch (HttpRequestException ex)
             {
-                string message = ex.Message;
-                int statusCode = 401;
-
-                if (ex.Message.Contains("EMAIL_NOT_FOUND") || ex.Message.Contains("INVALID_PASSWORD"))
-                {
-                    message = "Incorrect email or password.";
-                }
-                else if (ex.Message.Contains("USER_DISABLED"))
-                {
-                    message = "Your account has been disabled.";
-                    statusCode = 403;
-                }
-
                 return new StatusResponse
                 {
                     Success = false,
-                    StatusCode = statusCode,
-                    Message = message
+                    StatusCode = 500,
+                    Message = $"Network error: {ex.Message}"
                 };
             }
             catch (Exception ex)
