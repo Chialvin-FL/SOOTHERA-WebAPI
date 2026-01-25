@@ -33,6 +33,6 @@ jobs:
         server: ${{ secrets.SOMEE_FTP_SERVER }}
         username: ${{ secrets.SOMEE_FTP_USERNAME }}
         password: ${{ secrets.SOMEE_FTP_PASSWORD }}
-        local-dir: ./publish
+        local-dir: ./publish/
         server-dir: /www.dev-soothera-api.somee.com/
         protocol: ftp  # fallback to ftp if fails
