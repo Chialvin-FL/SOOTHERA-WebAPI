@@ -1,9 +1,9 @@
-name: Deploy KuwagoAPI to Somee
+name: Deploy API to Somee
 
 on:
   push:
     branches:
-      - master  # change if you deploy from another branch
+      - main  # change if you deploy from another branch
 
 jobs:
   build-and-deploy:
