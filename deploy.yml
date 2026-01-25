@@ -1,0 +1,38 @@
+name: Deploy KuwagoAPI to Somee
+
+on:
+  push:
+    branches:
+      - master  # change if you deploy from another branch
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'  # adjust if using a different version
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build in Release mode
+      run: dotnet build --configuration Release
+
+    - name: Publish project
+      run: dotnet publish ./FL.Basecode.WebAPI.csproj -c Release -o ./publish
+
+    - name: Deploy to Somee via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.SOMEE_FTP_SERVER }}
+        username: ${{ secrets.SOMEE_FTP_USERNAME }}
+        password: ${{ secrets.SOMEE_FTP_PASSWORD }}
+        local-dir: ./publish
+        server-dir: /www.dev-soothera-api.somee.com/
+        protocol: ftp  # fallback to ftp if fails
