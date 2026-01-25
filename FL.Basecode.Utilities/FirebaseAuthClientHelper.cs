@@ -8,12 +8,16 @@ namespace FL.Basecode.Utilities.Firebase
     {
         private readonly FirebaseAuthClient _authClient;
 
+        public string ApiKey { get; }
+
         public FirebaseAuthClientHelper()
         {
             // Initialize FirebaseAuthClient with your API key and Auth Domain
+            ApiKey = "AIzaSyB7ab9JSHKN9l5XfnR_NZx9aXcVfhW3qjU";
+
             _authClient = new FirebaseAuthClient(new FirebaseAuthConfig
             {
-                ApiKey = "AIzaSyB7ab9JSHKN9l5XfnR_NZx9aXcVfhW3qjU",
+                ApiKey = ApiKey,
                 AuthDomain = "sootheradb.firebaseapp.com"
             });
         }
