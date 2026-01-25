@@ -25,7 +25,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Publish project
-      run: dotnet publish ./FL.Basecode.WebAPI.csproj -c Release -o ./publish
+      run: dotnet publish ./FL.Basecode.WebAPI/FL.Basecode.WebAPI.csproj -c Release -o ./publish
 
     - name: Deploy to Somee via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
