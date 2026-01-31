@@ -25,7 +25,7 @@ string firebaseKeyPath =
 
 if (!File.Exists(firebaseKeyPath))
 {
-    throw new FileNotFoundException("Firebase service account file not found.", firebaseKeyPath);
+    Console.WriteLine("Firebase key NOT FOUND at: " + firebaseKeyPath);
 }
 
 
@@ -77,4 +77,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGet("/", () => "Soothera API is running");
 app.Run();
