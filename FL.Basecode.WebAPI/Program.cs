@@ -9,12 +9,25 @@ using Google.Cloud.Firestore;
 var builder = WebApplication.CreateBuilder(args);
 
 // ------------------------------
-// Firebase configuration
+// Firebase configuration Local run
 // ------------------------------
-string firebaseKeyPath = Path.Combine(
-    builder.Environment.ContentRootPath,
-    "sootheradb-firebase-adminsdk-fbsvc-075e4ce008.json"
-);
+//string firebaseKeyPath = Path.Combine(
+//    builder.Environment.ContentRootPath,
+//    "sootheradb-firebase-adminsdk-fbsvc-075e4ce008.json"
+//);
+
+
+// ------------------------------
+// Firebase configuration Deployed run
+// ------------------------------
+string firebaseKeyPath =
+    @"D:\DZHosts\LocalUser\whyiamhated\Protected.dev-soothera-api.somee.com\sootheradb-firebase-adminsdk-fbsvc-075e4ce008.json";
+
+if (!File.Exists(firebaseKeyPath))
+{
+    throw new FileNotFoundException("Firebase service account file not found.", firebaseKeyPath);
+}
+
 
 // OPTIONAL: only needed if other Google SDKs rely on it
 Environment.SetEnvironmentVariable(
