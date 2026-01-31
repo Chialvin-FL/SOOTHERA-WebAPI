@@ -77,5 +77,4 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapGet("/", () => "Soothera API is running");
 app.Run();
