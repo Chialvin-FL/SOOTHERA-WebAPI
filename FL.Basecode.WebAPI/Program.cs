@@ -21,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Firebase configuration Deployed run
 // ------------------------------
 string firebaseKeyPath =
-    @"D:\DZHosts\LocalUser\whyiamhated\Protected.dev-soothera-api.somee.com\sootheradb-firebase-adminsdk-fbsvc-075e4ce008.json";
+    @"D:\DZHosts\LocalUser\whyiamhated\www.dev-soothera-api.somee.com\sootheradb-firebase-adminsdk-fbsvc-075e4ce008.json";
 
 if (!File.Exists(firebaseKeyPath))
 {
